@@ -24,7 +24,7 @@ public class MathProgram : MonoBehaviour
     public Button but8;
     public Button but9;
     public Button but0;
-    public avgTime avgTimer;
+    public avgTime avgTimer = new avgTime();
     public Slider timer;
     public float sessioLeft;
     public VRTK_ControllerEvents rightCont;
@@ -36,6 +36,7 @@ public class MathProgram : MonoBehaviour
     private string ops2;
     private string ops3;
     public string session;
+    private bool interactableQuest = false;
     private int butSelect = 1;
     private int int1;
     private int int2;
@@ -47,8 +48,9 @@ public class MathProgram : MonoBehaviour
     private int largeInt4;
     private int result;
     private int questAns;
-    private int questRight;
-    private int questWrong;
+    private int questRight = 0;
+    private int questWrong = 0;
+    private int questFailed = 0;
     private int curQuestRight = 0;
     private int curQuestWrong = 0;
     private float sessionStart;
@@ -156,6 +158,7 @@ public class MathProgram : MonoBehaviour
                 sessionStart = Time.time;
                 sessionState = sessionStart;
                 Debug.Log("Starting the Training session");
+                interactableQuest = true;
                 GenerateMathProblem();
             }
         }
@@ -186,6 +189,7 @@ public class MathProgram : MonoBehaviour
                 session = "break";
                 state = 0;
                 Debug.Log("Training session has ended");
+                interactableQuest = false;
 
                 avgTimer.avgTime0 = averageTime[0];
                 avgTimer.avgTime1 = averageTime[1];
@@ -234,6 +238,7 @@ public class MathProgram : MonoBehaviour
                 }
 
                 session = "imaging";
+                interactableQuest = true;
                 sessionStart = Time.time;
                 sessionState = sessionStart;
                 Debug.Log("Imaging session has begun");
@@ -251,6 +256,14 @@ public class MathProgram : MonoBehaviour
                 {
                     GenerateMathProblem();
                     feedbackText.text = "Timeout!";
+                    curQuestWrong++;
+                    questFailed++;
+                    questAns++;
+                    if (curQuestWrong > 3)
+                    {
+                        averageTime[state] += averageTime[state] / 100 * 10;
+                        curQuestWrong = 0;
+                    }
                     lastQuestAns = Time.time;
                 }
                 else
@@ -295,6 +308,7 @@ public class MathProgram : MonoBehaviour
                 session = "break";
                 state = 0;
                 Debug.Log("Training session has ended");
+                interactableQuest = false;
 
                 avgTimer.avgTime0 = averageTime[0];
                 avgTimer.avgTime1 = averageTime[1];
@@ -387,7 +401,7 @@ public class MathProgram : MonoBehaviour
 
     public void ChangeSelectedBut()
     {
-        Debug.Log("Start");
+        //Debug.Log("Start");
         switch (butSelect)
         {
             case 0:
@@ -421,7 +435,7 @@ public class MathProgram : MonoBehaviour
                 but9.Select();
                 break;
         }
-        Debug.Log("End" + butSelect);
+        //Debug.Log("End" + butSelect);
     }
 
     public void ChangeState(int tempState)
@@ -431,44 +445,49 @@ public class MathProgram : MonoBehaviour
 
     public void answerQuestion(object sender, ControllerInteractionEventArgs e)
     {
-        questionAnswerTime = Time.time - lastQuestAns;
-        timeList.Add(questionAnswerTime);
-
-        if(butSelect == result)
+        if (interactableQuest)
         {
-            //You are correct
-            questRight++;
-            curQuestRight++;
-            curQuestWrong = 0;
-            questAns++;
+            questionAnswerTime = Time.time - lastQuestAns;
+            timeList.Add(questionAnswerTime);
 
-            feedbackText.text = "Correct!";
+            if (butSelect == result)
+            {
+                //You are correct
+                questRight++;
+                curQuestRight++;
+                curQuestWrong = 0;
+                questAns++;
 
-            //Debug.Log("You are Right");
+                feedbackText.text = "Correct!";
+
+                //Debug.Log("You are Right");
+            }
+            else
+            {
+                //You are wrong
+                questWrong++;
+                curQuestWrong++;
+                curQuestRight = 0;
+                questAns++;
+
+                feedbackText.text = "False!";
+
+                //Debug.Log("You are Wrong");
+            }
+
+            if (curQuestRight > 3)
+            {
+                averageTime[state] -= averageTime[state] / 100 * 10;
+                curQuestRight = 0;
+            }
+            if (curQuestWrong > 3)
+            {
+                averageTime[state] += averageTime[state] / 100 * 10;
+                curQuestWrong = 0;
+            }
+
+            GenerateMathProblem();
         }
-        else
-        {
-            //You are wrong
-            questWrong++;
-            curQuestWrong++;
-            curQuestRight = 0;
-            questAns++;
-
-            feedbackText.text = "False!";
-
-            //Debug.Log("You are Wrong");
-        }
-
-        if(curQuestRight > 3)
-        {
-            averageTime[state] -= averageTime[state] / 100 * 10;
-        }
-        if (curQuestWrong > 3)
-        {
-            averageTime[state] += averageTime[state] / 100 * 10;
-        }
-
-        GenerateMathProblem();
     }
 
     public void GenerateMathProblem()
@@ -656,7 +675,7 @@ public class MathProgram : MonoBehaviour
                 if (int2 * int3 < result + 99)
                 {
                     if (ops1 == " + ")
-                        int1 = result - (int2 * int2);
+                        int1 = result - (int2 * int3);
                     else
                         int1 = result + (int2 * int3);
 
