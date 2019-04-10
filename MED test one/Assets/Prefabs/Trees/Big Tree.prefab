@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 8047678005631115297}
   - component: {fileID: 4159274794478140400}
   m_Layer: 0
-  m_Name: Big Tree 1
+  m_Name: Big Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2322,7 +2322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f5fa456c0041da4ba07e538ee81e4f5, type: 2}
+  - {fileID: 2100000, guid: 57e3946ee0162184d9f72bcdccb63a53, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
