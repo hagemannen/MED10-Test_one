@@ -55,6 +55,7 @@ public class MathProgram : MonoBehaviour
     private int questFailed = 0;
     private int curQuestRight = 0;
     private int curQuestWrong = 0;
+    private int previous;
     private float sessionStart;
     private float sessionState;
     private float lastQuestAns;
@@ -561,9 +562,12 @@ public class MathProgram : MonoBehaviour
 
     public void rTouchPressed(object sender, ControllerInteractionEventArgs e)
     {
-        if (rightCont.GetTouchpadAxisAngle() < 180f)
+        //Debug.Log(rightCont.GetTouchpadAxisAngle() + "   |   " + rightCont.GetTouchpadAxis().x);
+        if(rightCont.GetTouchpadAxisAngle() == 90)
+        {
+            if(previous == 0)
             {
-            //Debug.Log("TESTER");
+                previous = 1;
                 if (butSelect < 9)
                 {
                     butSelect++;
@@ -575,6 +579,7 @@ public class MathProgram : MonoBehaviour
             }
             else
             {
+                previous = 0;
                 if (butSelect > 0)
                 {
                     butSelect--;
@@ -584,13 +589,70 @@ public class MathProgram : MonoBehaviour
                     butSelect = 9;
                 }
             }
-            ChangeSelectedBut();
+        }
+
+        else if (rightCont.GetTouchpadAxisAngle() < 180f)
+            {
+            //Debug.Log("TESTER");
+            previous = 1;
+                if (butSelect < 9)
+                {
+                    butSelect++;
+                }
+                else
+                {
+                    butSelect = 0;
+                }
+            }
+        else
+        {
+
+            previous = 0;
+            if (butSelect > 0)
+            {
+                butSelect--;
+            }
+            else
+            {
+                butSelect = 9;
+            }
+        }
+        ChangeSelectedBut();
     }
 
     public void lTouchPressed(object sender, ControllerInteractionEventArgs e)
     {
-        if (leftCont.GetTouchpadAxisAngle() < 180f)
+        if (rightCont.GetTouchpadAxisAngle() == 90)
         {
+            if (previous == 0)
+            {
+                previous = 1;
+                if (butSelect < 9)
+                {
+                    butSelect++;
+                }
+                else
+                {
+                    butSelect = 0;
+                }
+            }
+            else
+            {
+                previous = 0;
+                if (butSelect > 0)
+                {
+                    butSelect--;
+                }
+                else
+                {
+                    butSelect = 9;
+                }
+            }
+        }
+
+        else if (leftCont.GetTouchpadAxisAngle() < 180f)
+        {
+            previous = 1;
             if (butSelect < 9)
             {
                 butSelect++;
@@ -602,6 +664,7 @@ public class MathProgram : MonoBehaviour
         }
         else
         {
+            previous = 0;
             if (butSelect > 0)
             {
                 butSelect--;
