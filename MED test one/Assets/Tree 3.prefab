@@ -112,7 +112,7 @@ Material:
         m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b318ef9e0a3d490448249221267ff515, type: 3}
+        m_Texture: {fileID: 2800000, guid: ec543e721eef08042959d3ac9cde0961, type: 3}
         m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
@@ -151,7 +151,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b318ef9e0a3d490448249221267ff515, type: 3}
+        m_Texture: {fileID: 2800000, guid: 52a6e6e4c26820a4d914224592a344ac, type: 3}
         m_Scale: {x: 1.96, y: 0.87}
         m_Offset: {x: -0.47, y: 0.04}
     - _ShadowTex:
