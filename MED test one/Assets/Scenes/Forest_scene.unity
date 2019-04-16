@@ -21542,53 +21542,103 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2822836913483290184, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_AnchoredPosition.y
+      value: 282
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 7830763554348956857, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_LocalRotation.x
+      value: 0
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 1279436214875786761, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_LocalRotation.y
+      value: 0.1979824
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 1815513134342189108, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_LocalRotation.z
+      value: 0
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 6671845825850117603, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_LocalRotation.w
+      value: 0.9802056
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 5754104881887945624, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 22.838
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 9148262198996149756, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_LocalPosition.z
+      value: 180
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 7454247970313186802, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_AnchoredPosition.x
+      value: 1703
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 8965877152824665351, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_LocalScale.y
+      value: 1.0466659
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 5433901589595861599, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
+<<<<<<< HEAD
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+=======
+      propertyPath: m_LocalScale.x
+      value: 0.91463864
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 2972030935391121401, guid: 7ca90016ad15e4d428f8bd3ccc937538,
         type: 3}
@@ -42591,17 +42641,29 @@ PrefabInstance:
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
       value: -34.100006
+=======
+      value: 10.79
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
       propertyPath: m_LocalPosition.y
+<<<<<<< HEAD
       value: 0
+=======
+      value: 0.12
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<< HEAD
       value: -90.799995
+=======
+      value: 0.1
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
@@ -42611,7 +42673,11 @@ PrefabInstance:
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
       propertyPath: m_LocalRotation.y
+<<<<<<< HEAD
       value: 0
+=======
+      value: 0.1979824
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
@@ -42621,7 +42687,11 @@ PrefabInstance:
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
       propertyPath: m_LocalRotation.w
+<<<<<<< HEAD
       value: 1
+=======
+      value: 0.9802056
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
@@ -42636,13 +42706,36 @@ PrefabInstance:
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+<<<<<<< HEAD
       value: 0
+=======
+      value: 22.838
+>>>>>>> parent of c156481... skilt
       objectReference: {fileID: 0}
     - target: {fileID: 7339779487534190946, guid: dc475ea50eb9bbb4cb39fcb381824eca,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+=======
+    - target: {fileID: 400000, guid: 659fdbda6ae10114c891dc19dcebd644, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 659fdbda6ae10114c891dc19dcebd644, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 659fdbda6ae10114c891dc19dcebd644, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 659fdbda6ae10114c891dc19dcebd644, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fbe699d722e29894c89eea6f024d87c8, type: 2}
+>>>>>>> parent of c156481... skilt
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc475ea50eb9bbb4cb39fcb381824eca, type: 3}
 --- !u!1001 &996553903
