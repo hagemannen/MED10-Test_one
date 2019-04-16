@@ -26,6 +26,8 @@ public class MathProgram : MonoBehaviour
     public Button but0;
     public avgTime avgTimer = new avgTime();
     public Slider timer;
+    public Slider perfArrow;
+    public Slider perfBar;
     public float sessioLeft;
     public VRTK_ControllerEvents rightCont;
     public VRTK_ControllerEvents leftCont;
@@ -53,6 +55,7 @@ public class MathProgram : MonoBehaviour
     private int questFailed = 0;
     private int curQuestRight = 0;
     private int curQuestWrong = 0;
+    private int previous;
     private float sessionStart;
     private float sessionState;
     private float lastQuestAns;
@@ -140,6 +143,18 @@ public class MathProgram : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*if (Input.GetKeyDown(KeyCode.R))
+        {
+            butSelect = result;
+            ChangeSelectedBut();
+            answerQuestion2();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            butSelect = result + 1;
+            answerQuestion2();
+        }*/
+
         if (session == "start")
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -154,6 +169,12 @@ public class MathProgram : MonoBehaviour
                     File.Delete(filePath);
                     File.Create(filePath);
                 }
+
+                if(!File.Exists(Application.dataPath + "/Data.txt"))
+                {
+                    File.Create(Application.dataPath + "/Data.txt");
+                }
+
                 session = "train";
                 sessionStart = Time.time;
                 sessionState = sessionStart;
@@ -185,17 +206,144 @@ public class MathProgram : MonoBehaviour
             }
             else
             {
+                float tempI = 0;
+                for (int i = 0; i < timeList.Count; i++)
+                {
+                    tempI += timeList[i];
+                }
+                averageTime[state] = tempI / timeList.Count;
+                timeList = new List<float>();
 
-                session = "break";
+                
+
+                session = "break1";
+                GenerateMathProblem();
                 state = 0;
+
+                text.text = "Time for a break";
+
                 Debug.Log("Training session has ended");
                 interactableQuest = false;
 
+                File.AppendAllText(Application.dataPath + "/Data.txt",  "Training Session " +
+                                                                    "\nQuestion answered right: " + questRight + 
+                                                                    "\nQuestion answered wrong: " + questWrong + 
+                                                                    "\nAverage Times: " + averageTime[0] + ", " + averageTime[1] + ", " + averageTime[2] + ", " + averageTime[3] + ", " + averageTime[4] + 
+                                                                    "\r\n\r\n\r\n");
+            }
+
+            //Testing purposes only
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                session = "break1";
+                sessionStart = Time.time;
+                sessionState = sessionStart;
+                Debug.Log("Starting the Break session");
+                GenerateMathProblem();
+            }
+        }
+
+        else if (session == "break1")
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                interactableQuest = false;
+
+                if (float.IsNaN(averageTime[0]))
+                {
+                    averageTime[0] = 4.0f;
+                }
+                
+                if (float.IsNaN(averageTime[1]))
+                {
+                    averageTime[1] = 5.0f;
+                }
+                
+                if (float.IsNaN(averageTime[2]))
+                {
+                    averageTime[2] = 6.0f;
+                }
+                
+                if (float.IsNaN(averageTime[3]))
+                {
+                    averageTime[3] = 7.0f;
+                }
+                
+                if (float.IsNaN(averageTime[4]))
+                {
+                    averageTime[4] = 8.0f;
+                }
+
                 avgTimer.avgTime0 = averageTime[0];
                 avgTimer.avgTime1 = averageTime[1];
-                avgTimer.avgTime1 = averageTime[2];
-                avgTimer.avgTime1 = averageTime[3];
-                avgTimer.avgTime1 = averageTime[4];
+                avgTimer.avgTime2 = averageTime[2];
+                avgTimer.avgTime3 = averageTime[3];
+                avgTimer.avgTime4 = averageTime[4];
+                
+
+                if (questAns != 0)
+                    avgTimer.avgComp = questRight / questAns;
+                else
+                {
+                    Debug.Log("HOW DID YOU MANAGE TO NOT GET A SINGLE THING CORRECT");
+                    avgTimer.avgComp = 0.8f;
+                }
+                    
+
+                Debug.Log(averageTime[0] + ", " + averageTime[1] + ", " + averageTime[2] + ", " + averageTime[3] + ", " + averageTime[4]);
+
+                string json = JsonUtility.ToJson(avgTimer);
+                Debug.Log(json);
+
+                using (StreamWriter streamWriter = File.CreateText(filePath))
+                {
+                    streamWriter.Write(json);
+                }
+
+                SceneManager.LoadScene(1);
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                if (float.IsNaN(averageTime[0]))
+                {
+                    averageTime[0] = 4.0f;
+                }
+
+                if (float.IsNaN(averageTime[1]))
+                {
+                    averageTime[1] = 5.0f;
+                }
+
+                if (float.IsNaN(averageTime[2]))
+                {
+                    averageTime[2] = 6.0f;
+                }
+
+                if (float.IsNaN(averageTime[3]))
+                {
+                    averageTime[3] = 7.0f;
+                }
+
+                if (float.IsNaN(averageTime[4]))
+                {
+                    averageTime[4] = 8.0f;
+                }
+
+                avgTimer.avgTime0 = averageTime[0];
+                avgTimer.avgTime1 = averageTime[1];
+                avgTimer.avgTime2 = averageTime[2];
+                avgTimer.avgTime3 = averageTime[3];
+                avgTimer.avgTime4 = averageTime[4];
+
+                interactableQuest = false;
+
+                if (questAns != 0)
+                    avgTimer.avgComp = questRight / questAns;
+                else
+                {
+                    Debug.Log("HOW DID YOU MANAGE TO NOT GET A SINGLE THING CORRECT");
+                    avgTimer.avgComp = 0.8f;
+                }
 
                 string json = JsonUtility.ToJson(avgTimer);
 
@@ -204,17 +352,7 @@ public class MathProgram : MonoBehaviour
                     streamWriter.Write(json);
                 }
 
-                SceneManager.LoadScene(Random.Range(1, 3));
-            }
-
-            //Testing purposes only
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                session = "break";
-                sessionStart = Time.time;
-                sessionState = sessionStart;
-                Debug.Log("Starting the Break session");
-                GenerateMathProblem();
+                SceneManager.LoadScene(2);
             }
         }
 
@@ -230,12 +368,69 @@ public class MathProgram : MonoBehaviour
 
                         avgTimer = JsonUtility.FromJson<avgTime>(jsonString);
                     }
-                    averageTime[0] = avgTimer.avgTime0;
-                    averageTime[1] = avgTimer.avgTime1;
-                    averageTime[2] = avgTimer.avgTime2;
-                    averageTime[3] = avgTimer.avgTime3;
-                    averageTime[4] = avgTimer.avgTime4;
+                    if (avgTimer.avgTime0 == 0 || float.IsNaN(avgTimer.avgTime4))
+                    {
+                        averageTime[0] = 4;
+                    }
+                    else
+                    {
+                        averageTime[0] = avgTimer.avgTime0;
+                    }
+
+                    if (avgTimer.avgTime1 == 0 || float.IsNaN(avgTimer.avgTime4))
+                    {
+                        averageTime[1] = 6;
+                    }
+                    else
+                    {
+                        averageTime[1] = avgTimer.avgTime1;
+                    }
+
+                    if (avgTimer.avgTime2 == 0 || float.IsNaN(avgTimer.avgTime4))
+                    {
+                        averageTime[2] = 8;
+                    }
+                    else
+                    {
+                        averageTime[2] = avgTimer.avgTime2;
+                    }
+
+                    if (avgTimer.avgTime3 == 0 || float.IsNaN(avgTimer.avgTime4))
+                    {
+                        averageTime[3] = 9;
+                    }
+                    else
+                    {
+                        averageTime[3] = avgTimer.avgTime3;
+                    }
+
+                    if (avgTimer.avgTime4 == 0 || float.IsNaN(avgTimer.avgTime4))
+                    {
+                        averageTime[4] = 10;
+                    }
+                    else
+                    {
+                        averageTime[4] = avgTimer.avgTime4;
+                    }
+
+                    if(avgTimer.avgComp == 0)
+                    {
+                        perfBar.value = 0.85f;
+                    }
+                    else
+                    {
+                        perfBar.value = avgTimer.avgComp;
+                    }
                 }
+                else
+                {
+                    averageTime[0] = 4;
+                    averageTime[1] = 6;
+                    averageTime[2] = 8;
+                    averageTime[3] = 9;
+                    averageTime[4] = 10;
+                }
+                
 
                 session = "imaging";
                 interactableQuest = true;
@@ -264,6 +459,8 @@ public class MathProgram : MonoBehaviour
                         averageTime[state] += averageTime[state] / 100 * 10;
                         curQuestWrong = 0;
                     }
+                    perfArrow.value = (questRight + 0.0f) / (questAns + 0.0f);
+
                     lastQuestAns = Time.time;
                 }
                 else
@@ -277,10 +474,6 @@ public class MathProgram : MonoBehaviour
                     state++;
                     sessionState = Time.time;
                 }
-            }
-            else
-            {
-                session = "start";
             }
 
 
@@ -304,17 +497,26 @@ public class MathProgram : MonoBehaviour
             }
             else
             {
+                float tempI = 0;
+                for (int i = 0; i < timeList.Count; i++)
+                {
+                    tempI += timeList[i];
+                }
+                averageTime[state] = tempI / timeList.Count;
+                timeList = new List<float>();
 
-                session = "break";
+                text.text = "Time for a break";
+
+                session = "break2";
                 state = 0;
-                Debug.Log("Training session has ended");
+                Debug.Log("Imaging session has ended");
                 interactableQuest = false;
 
                 avgTimer.avgTime0 = averageTime[0];
                 avgTimer.avgTime1 = averageTime[1];
-                avgTimer.avgTime1 = averageTime[2];
-                avgTimer.avgTime1 = averageTime[3];
-                avgTimer.avgTime1 = averageTime[4];
+                avgTimer.avgTime2 = averageTime[2];
+                avgTimer.avgTime3 = averageTime[3];
+                avgTimer.avgTime4 = averageTime[4];
 
                 string json = JsonUtility.ToJson(avgTimer);
 
@@ -323,13 +525,27 @@ public class MathProgram : MonoBehaviour
                     streamWriter.Write(json);
                 }
 
+                File.AppendAllText(Application.dataPath + "/Data.txt",  "Imaging Session " +
+                                                                    "\nForest Scene: " + forest +
+                                                                    "\nQuestions answered right: " + questRight +
+                                                                    "\nQuestions answered wrong: " + questWrong +
+                                                                    "\nQuestions not answered:   " + questFailed +
+                                                                    "\nAverage Times: " + averageTime[0] + ", " + averageTime[1] + ", " + averageTime[2] + ", " + averageTime[3] + ", " + averageTime[4] +
+                                                                    "\r\n\r\n\r\n");
+            }
+        }
+
+        else if(session == "break2")
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
                 if (forest)
                 {
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(2);
                 }
                 else
                 {
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(1);
                 }
             }
         }
@@ -346,9 +562,12 @@ public class MathProgram : MonoBehaviour
 
     public void rTouchPressed(object sender, ControllerInteractionEventArgs e)
     {
-        if (rightCont.GetTouchpadAxisAngle() < 180f)
+        //Debug.Log(rightCont.GetTouchpadAxisAngle() + "   |   " + rightCont.GetTouchpadAxis().x);
+        if(rightCont.GetTouchpadAxisAngle() == 90)
+        {
+            if(previous == 0)
             {
-            Debug.Log("TESTER");
+                previous = 1;
                 if (butSelect < 9)
                 {
                     butSelect++;
@@ -360,6 +579,7 @@ public class MathProgram : MonoBehaviour
             }
             else
             {
+                previous = 0;
                 if (butSelect > 0)
                 {
                     butSelect--;
@@ -369,13 +589,70 @@ public class MathProgram : MonoBehaviour
                     butSelect = 9;
                 }
             }
-            ChangeSelectedBut();
+        }
+
+        else if (rightCont.GetTouchpadAxisAngle() < 180f)
+            {
+            //Debug.Log("TESTER");
+            previous = 1;
+                if (butSelect < 9)
+                {
+                    butSelect++;
+                }
+                else
+                {
+                    butSelect = 0;
+                }
+            }
+        else
+        {
+
+            previous = 0;
+            if (butSelect > 0)
+            {
+                butSelect--;
+            }
+            else
+            {
+                butSelect = 9;
+            }
+        }
+        ChangeSelectedBut();
     }
 
     public void lTouchPressed(object sender, ControllerInteractionEventArgs e)
     {
-        if (leftCont.GetTouchpadAxisAngle() < 180f)
+        if (rightCont.GetTouchpadAxisAngle() == 90)
         {
+            if (previous == 0)
+            {
+                previous = 1;
+                if (butSelect < 9)
+                {
+                    butSelect++;
+                }
+                else
+                {
+                    butSelect = 0;
+                }
+            }
+            else
+            {
+                previous = 0;
+                if (butSelect > 0)
+                {
+                    butSelect--;
+                }
+                else
+                {
+                    butSelect = 9;
+                }
+            }
+        }
+
+        else if (leftCont.GetTouchpadAxisAngle() < 180f)
+        {
+            previous = 1;
             if (butSelect < 9)
             {
                 butSelect++;
@@ -387,6 +664,7 @@ public class MathProgram : MonoBehaviour
         }
         else
         {
+            previous = 0;
             if (butSelect > 0)
             {
                 butSelect--;
@@ -487,6 +765,11 @@ public class MathProgram : MonoBehaviour
             }
 
             GenerateMathProblem();
+
+            if(session == "imaging")
+            {
+                perfArrow.value = (questRight + 0.0f) / (questAns + 0.0f);
+            }
         }
     }
 
@@ -1079,6 +1362,7 @@ public class MathProgram : MonoBehaviour
         }
     }
 
+    [System.Serializable]
     public class avgTime
     {
         public float avgTime0;
@@ -1086,6 +1370,61 @@ public class MathProgram : MonoBehaviour
         public float avgTime2;
         public float avgTime3;
         public float avgTime4;
+        public float avgComp;
+    }
+
+
+
+    public void answerQuestion2()
+    {
+        if (interactableQuest)
+        {
+            questionAnswerTime = Time.time - lastQuestAns;
+            timeList.Add(questionAnswerTime);
+
+            if (butSelect == result)
+            {
+                //You are correct
+                questRight++;
+                curQuestRight++;
+                curQuestWrong = 0;
+                questAns++;
+
+                feedbackText.text = "Correct!";
+
+                //Debug.Log("You are Right");
+            }
+            else
+            {
+                //You are wrong
+                questWrong++;
+                curQuestWrong++;
+                curQuestRight = 0;
+                questAns++;
+
+                feedbackText.text = "False!";
+
+                //Debug.Log("You are Wrong");
+            }
+
+            if (curQuestRight > 3)
+            {
+                averageTime[state] -= averageTime[state] / 100 * 10;
+                curQuestRight = 0;
+            }
+            if (curQuestWrong > 3)
+            {
+                averageTime[state] += averageTime[state] / 100 * 10;
+                curQuestWrong = 0;
+            }
+
+            GenerateMathProblem();
+
+            if (session == "imaging")
+            {
+                perfArrow.value = (questRight + 0.0f) / (questAns + 0.0f);
+            }
+        }
     }
 }
 
