@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/simple.unity
     guid: f1117de1aacf0534b912e073a5d5cd26
+  - enabled: 1
+    path: Assets/Scenes/ForestWaiting.unity
+    guid: 0d73722f73059a0479a64362095f0ea9
+  - enabled: 1
+    path: Assets/Scenes/RoomWaiting.unity
+    guid: a161fd4e34cfdee42a43b3de09463562
   m_configObjects: {}

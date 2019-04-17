@@ -1,0 +1,8 @@
+{"avgTime0":2.0,"avgTime1":3.221020221710205,"avgTime2":3.5431222915649416,"avgTime3":3.5431222915649416,"avgTime4":NaN,"avgComp":0.0}Imaging Session 
+Forest Scene: True
+Questions answered right: 0
+Questions answered wrong: 0
+Questions not answered:   90
+Average Times: 2, 3,22102, 3,543122, 3,543122, NaN
+
+

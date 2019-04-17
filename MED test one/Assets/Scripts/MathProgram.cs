@@ -299,8 +299,9 @@ public class MathProgram : MonoBehaviour
                 {
                     streamWriter.Write(json);
                 }
+                
 
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(3);
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
@@ -352,7 +353,7 @@ public class MathProgram : MonoBehaviour
                     streamWriter.Write(json);
                 }
 
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(4);
             }
         }
 
@@ -541,11 +542,11 @@ public class MathProgram : MonoBehaviour
             {
                 if (forest)
                 {
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(4);
                 }
                 else
                 {
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(3);
                 }
             }
         }
