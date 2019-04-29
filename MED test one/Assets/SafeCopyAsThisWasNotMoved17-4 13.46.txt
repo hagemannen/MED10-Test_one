@@ -1,1 +1,0 @@
-{"avgTime0":0.0,"avgTime1":0.0,"avgTime2":0.0,"avgTime3":0.0,"avgTime4":0.0,"avgComp":0.800000011920929}
